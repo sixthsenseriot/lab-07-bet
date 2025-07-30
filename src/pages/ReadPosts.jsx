@@ -5,8 +5,15 @@ import Card from "../components/Card";
 const ReadPosts = (props) => {
     const [posts, setPosts] = useState([]);
 
+    // READ all post from table
     useEffect(() => {
-        setPosts(props.data);
+        const fetchPosts = async () => {
+            const { data } = await supabase.from("Posts").select();
+
+            // Set state of posts
+            setPosts(data);
+        };
+        fetchPosts();
     }, [props]);
 
     return (
