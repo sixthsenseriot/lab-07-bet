@@ -12,6 +12,12 @@ const EditPost = ({ data }) => {
         description: "",
     });
 
+    const deletePost = async (event) => {
+        event.preventDefault();
+        await supabase.from("Posts").delete().eq("id", id);
+        window.location = "/";
+    };
+
     const updatePost = async (event) => {
         event.preventDefault();
 
@@ -73,7 +79,9 @@ const EditPost = ({ data }) => {
                 ></textarea>
                 <br />
                 <input type="submit" value="Submit" onClick={updatePost} />
-                <button className="deleteButton">Delete</button>
+                <button className="deleteButton" onClick={deletePost}>
+                    Delete
+                </button>
             </form>
         </div>
     );
